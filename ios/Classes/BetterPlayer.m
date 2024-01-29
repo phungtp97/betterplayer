@@ -223,6 +223,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
             [asset.resourceLoader setDelegate:_loaderDelegate queue:streamQueue];
         }
         item = [AVPlayerItem playerItemWithAsset:asset];
+        playerItem.allowsHDR = NO;
     }
 
     if (@available(iOS 10.0, *) && overriddenDuration > 0) {
