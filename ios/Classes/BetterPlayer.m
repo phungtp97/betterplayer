@@ -223,7 +223,11 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
             [asset.resourceLoader setDelegate:_loaderDelegate queue:streamQueue];
         }
         item = [AVPlayerItem playerItemWithAsset:asset];
-        item.appliesPerFrameHDRDisplayMetadata = NO;
+        AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoCompositionWithPropertiesOfAsset:composition];
+        videoComposition.colorPrimaries = AVVideoColorPrimaries_SMPTE_C;
+        videoComposition.colorTransferFunction = AVVideoTransferFunction_SMPTE_ST_2084_PQ;
+        videoComposition.colorYCbCrMatrix = AVVideoYCbCrMatrix_ITU_R_601_4;
+        item.videoComposition = videoComposition;
     }
 
     if (@available(iOS 10.0, *) && overriddenDuration > 0) {
